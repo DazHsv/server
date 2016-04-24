@@ -18,7 +18,7 @@ router.get('/login', function(req,res) {
 
 // Testing
 router.get('/users', function(req,res) {
-	User.find( (err,users) => {
+	User.find( function(err,users) {
 		res.send(users);
 	} );
 });
