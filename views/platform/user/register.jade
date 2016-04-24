@@ -1,0 +1,40 @@
+extends ../layout.jade
+block content
+	form(action="/platform/profile/register" method="POST")
+		.form__control
+			.form__input
+				label(for="nickname") Nombre de usuario:
+			.form__input
+				input(type="text" id="nickname" name="nickname" placeholder="Usuario")
+				if exist
+					if exist.user
+						span El usuario ya existe!
+		.form__control
+			.form__input
+				label(for="nickname") Nombre y Apellido:
+			.form__input
+				input(type="text" id="firstname" name="firstname" placeholder="Nombre")
+				input(type="text" id="lastname" name="lastname" placeholder="Apellido")
+		.form__control
+			.form__input
+				label(for="email") Correo electrónico:
+			.form__input
+				if exist
+					if exist.email
+						span El correo ya existe!
+				input(type="email" id="email" name="email" placeholder="Email")
+		.form__control
+			.form__input
+				label(for="pwd") Contraseña:
+			.form__input
+				input(type="password" id="pwd" name="pwd" placeholder="Contraseña")
+		.form__control
+			.form__input
+				label(for="re_pwd") Confirmar contraseña:
+			.form__input
+				input(type="password" id="re_pwd" name="re_pwd" placeholder="Confirmar contraseña")
+		.form__control
+			.form__input
+				input(type="submit" value="Registrar")
+			.form__input
+				a(href="/platform/login") Ya tengo una cuenta

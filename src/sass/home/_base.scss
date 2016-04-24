@@ -1,0 +1,15 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	background:$blue url('../img/bg.jpg') center center no-repeat fixed;
+	background-size: cover;
+	overflow-x: hidden;
+}
+
+body.platform {
+	background:$blue url('../img/bg-platform.jpg') left center no-repeat fixed;
+	width: 100vw;
+	height: 100vh;
+	background-size: cover;
+	overflow-x: hidden;
+}

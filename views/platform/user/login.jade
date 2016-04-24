@@ -1,0 +1,21 @@
+extends ../layout.jade
+block content
+	if error
+		.error
+			span El correo o la contraseña no son correctos
+	form(action="/platform/profile/login" method="POST")
+		.form__control
+			.form__input
+				label(for="nickname") Correo electrónico:
+			.form__input
+				input(type="text" id="nickname" name="nickname" placeholder="Email")
+		.form__control
+			.form__input
+				label(for="pwd") Contraseña:
+			.form__input
+				input(type="password" id="pwd" name="pwd" placeholder="Contraseña")
+		.form__control
+			.form__input
+				input(type="submit" value="Ingresar")
+			.form__input
+				a(href="/platform/register") ¿No tienes cuenta? Resgistrate ahora!

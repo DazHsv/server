@@ -1,0 +1,8 @@
+extends ../layout.jade
+block content
+	h1 ¿Esta seguro de que desea eleminar su cuenta?
+	form(action="/#{user._id}?_method=delete")
+		.form__input
+			input(type="submit" value="Si")
+		.form__input
+			a(href="/platform/profile/#{user._id}") No
