@@ -17,10 +17,6 @@ app.get('/', function(req,res){
 	res.render('index');
 });
 
-app.get('/', function(req,res){
-	res.render('platform/home');
-});
-
 
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || 8080;

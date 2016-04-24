@@ -4,10 +4,11 @@ var express = require('express'),
 	methodOverride = require('method-override');
 
 // Routing de la plataforma
-var homeRoutes = require('./routes/Home'),
-	videoRoutes = require('./routes/Video'),
-	userRoutes = require('./routes/User'),
-	courseRoutes = require('./routes/Course');
+var toHome = require('./routes/Home'),
+	toVideos = require('./routes/Video'),
+	toUsers = require('./routes/User'),
+	toCourses = require('./routes/Course'),
+	toRedirects = require('./routes/Redirects');
 
 module.exports = function(app){
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -18,8 +19,9 @@ module.exports = function(app){
 	app.set('view engine','jade');
 
 	// Routing
-	//app.use('/platform',homeRoutes);
-	//app.use('/platform/video',videoRoutes);
-	//app.use('/platform/profile', userRoutes);
-	//app.use('/platform/course', courseRoutes);
+	app.use('/',toRedirects);
+	app.use('/platform',toHome);
+	//app.use('/platform/video',toVideos);
+	//app.use('/platform/profile', toUsers);
+	//app.use('/platform/course', toCourses);
 }
