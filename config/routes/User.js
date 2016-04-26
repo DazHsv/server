@@ -65,6 +65,9 @@ router.post('/register', function(req,res) {
 });
 
 // Log User
+router.get('/login', function(req,res){
+	res.redirect('/platform/login');
+});
 router.post('/login', function(req,res) {
 	var pwd = enc(req.body.pwd);
 	User.findOne({
@@ -72,11 +75,10 @@ router.post('/login', function(req,res) {
 		pwd:pwd
 	},
 	function(err,user){
-		if(( user != null && user != undefined)) {
-			res.redirect('/platform');
-		}else {
-			res.render('platform/user/login', {error:true});
-		}
+		console.log(err);
+		console.log('=========');
+		console.log(user);
+		res.send(':3');
 	});
 });
 
