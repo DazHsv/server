@@ -1,7 +1,8 @@
 var express = require('express'),
 	router = express.Router(),
 	Video = require('../models').Video,
-	Comment = require('../models').Comment;
+	Comment = require('../models').Comment,
+	checkLogged = require('../checkLogged');
 
 
 // Watch Video => /platform/video/:video_id

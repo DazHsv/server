@@ -5,7 +5,7 @@
 }
 
 .skill {
-	min-height: calc(40vh - 3em);
+	min-height: calc(35vh - 3em);
 	background-color: rgba(0,0,0,.5);
 	color: #fff;
 	padding: .5em;
@@ -18,7 +18,8 @@
 
 	&__title {
 		margin-bottom: .5em;
-		line-height: 1;
+		line-height: .5;
+		font-size: 2em;
 	}
 
 	&__content {

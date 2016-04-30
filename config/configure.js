@@ -1,16 +1,16 @@
-var express = require('express'),
-	bodyParser = require('body-parser'),
-	helmet = require('helmet'),
+var express        = require('express'),
+	bodyParser     = require('body-parser'),
+	helmet         = require('helmet'),
 	methodOverride = require('method-override'),
-	session = require('express-session'),
-	mongoose = require('mongoose'),
-	MongoStore = require('connect-mongo/es5')(session);
+	session        = require('express-session'),
+	mongoose       = require('mongoose'),
+	MongoStore     = require('connect-mongo/es5')(session);
 
 // Rutas de la plataforma
-var toHome = require('./routes/Home'),
-	toVideos = require('./routes/Video'),
-	toUsers = require('./routes/User'),
-	toCourses = require('./routes/Course'),
+var toHome      = require('./routes/Home'),
+	toVideos    = require('./routes/Video'),
+	toUsers     = require('./routes/User'),
+	toCourses   = require('./routes/Course'),
 	toRedirects = require('./routes/Redirects');
 
 var connection_string = '127.0.0.1:27017/e3';
@@ -53,8 +53,8 @@ module.exports = function(app){
 
 	// Routing
 	app.use('/',toRedirects);
-	app.use('/platform',toHome);
+	app.use('/e',toHome);
 	//app.use('/platform/video',toVideos);
-	app.use('/platform/profile', toUsers);
+	app.use('/e/profile', toUsers);
 	//app.use('/platform/course', toCourses);
 }

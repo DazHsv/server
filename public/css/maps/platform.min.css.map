@@ -1,0 +1,1 @@
+{"version":3,"sources":["custom-components/_base.scss"],"names":[],"mappings":"AAAA,KACC,6EACA,YACA,aACA,sBACA,iBAAmB,CACnB","file":"../platform.min.css","sourcesContent":["body {\n\tbackground:#1976D2 url('../img/bg-platform.jpg') left center no-repeat fixed;\n\twidth: 100vw;\n\theight: 100vh;\n\tbackground-size: cover;\n\toverflow-x: hidden;\n}"]}

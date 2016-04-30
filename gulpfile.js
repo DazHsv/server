@@ -12,11 +12,12 @@ gulp.task('sass',function(){
 	return gulp.src('./src/sass/**/*.scss')
 		.pipe(sourcemaps.init())
 		.pipe(sass({
-			outputStyle: 'extended'
+			outputStyle: 'compressed'
 		}).on('error', sass.logError))
 		.pipe(prefix({
 			browsers:['last 2 versions', '> 5%', 'ie 8']
 		}))
+		.pipe(rename({suffix:'.min'}))
 		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest('./public/css'));
 });

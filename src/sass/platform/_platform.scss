@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.platform {
+	justify-content:space-between;
+}
+
+.white-gc-link {
+	transition: box-shadow linear .2s, color linear .2s;
+
+	&:hover {
+		box-shadow: 0 64px 0 $color-white inset !important;
+		color: $color-primary !important;
+		font-weight: normal !important;
+	}
+}
+
+// Custom components
+@import "custom-components/base";

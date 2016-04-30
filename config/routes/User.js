@@ -5,8 +5,7 @@ var express = require('express'),
 
 // Get User Profile
 router.get('/:user_id', function(req,res) {
-	User.findOne( { _id:req.params.user_id },
-	function(err, u) {
+	User.findOne( { _id:req.params.user_id }, function(err, u) {
 		if(err){
 			console.error.bind('Error finding user : ');
 			res.render('platform/404');
@@ -25,10 +24,10 @@ router.post('/register', function(req,res) {
 		};
 
 	User.findOne({ nickname:req.body.nickname }, function(err, u){
-		exist.user = (u != null) || (u != undefined) ? true : false;
+		exist.user = (u != null) ? true : false;
 	});
 	User.findOne({ email:req.body.email }, function(err, u){
-		exist.email = (u != null) || (u != undefined) ? true : false;
+		exist.email = (u != null) ? true : false;
 	});
 
 	if(!exist.user && !exist.email){
@@ -84,11 +83,16 @@ router.post('/login', function(req,res) {
 
 // Edit User
 router.get('/:user_id/edit', function(req,res) {
-	User.findOne( { _id:req.params._id}, function(err,user){
-		res.render('platform/user/edit', {user:user});
-	});
+	if(req.session.user._id && (req.session.user._id == req.params.user_id) ){
+		res.redirect('/e/profile/'+req.params.user_id);
+	}else {
+		User.findOne( { _id:req.params._id}, function(err,user){
+			res.render('platform/user/edit', {user:user});
+		});
+	}
 });
 router.patch('/:user_id', function(req,res) {
+	var pwd = enc(req.body.pwd);
 	var data = {
 			nickname:req.body.nickname,
 			name: {
@@ -108,30 +112,39 @@ router.patch('/:user_id', function(req,res) {
 				}
 			},
 			email:req.body.email,
-			pwd:enc(req.body.pwd)
+			pwd:pwd
 		}
 
 	var user = new User(data);
 
-	user.update({_id:req.body.id}, function(err) {
-		if(err) console.error.bind('Error updating user : ');
-		res.redirect('/profile/'+req.body.id);
+	user.update({_id:req.params.user_id}, function(err) {
+		if(err != null){
+			res.redirect('/e/profile/'+req.params.user_id);
+		}else{
+			console.error.bind('Error updating user : ' + err);
+			res.redirect('/e/profile/'+req.params.user_id);
+		}
 	});
 });
 
 // Delete User
 router.get('/:user_id/delete', function(req,res) {
-	User.findOne( { _id:req.params.user_id}, function(err,user){
-		res.render('platform/user/delete', {user:user});
-	});
+	if(req.session.user._id && (req.session.user._id == req.params.user_id)){
+		User.findOne( { _id:req.params.user_id}, function(err,user){
+			res.render('platform/user/delete', {user:user});
+		});
+	}else {
+		res.redirect('/e/profile/'+req.params.user_id);
+	}
+
 });
 router.delete('/:user_id', function(req,res) {
 	User.remove({_id:req.params.user_id}, function(err) {
-		if(err){
+		if(err != null){
+			res.redirect('/platform');
+		}else{
 			console.log('Error deleting user! : ' + err);
 			res.redirect('/'+req.params.user_id);
-		}else{
-			res.redirect('/platform');
 		}
 	});
 });
