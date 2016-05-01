@@ -4,7 +4,11 @@ var express = require('express'),
 
 // Home view
 router.get('/', function(req,res) {
-	res.render('platform/home');
+	if(req.session.user != null){
+		res.redirect('/e/profile');
+	}else {
+		res.render('platform/home');
+	}
 });
 
 // Register User
@@ -13,8 +17,24 @@ router.get('/register', function(req,res) {
 });
 
 // Log User
-router.get('/login', function(req,res) {
-	res.render('platform/user/login');
+router.get('/login/', function(req,res) {
+	if(req.session.user != null){
+		res.redirect('/e/profile');
+	}else {
+		res.render('platform/user/login',{error:req.query.error});
+	}
+});
+
+// Logout User
+router.get('/logout',function(req,res){
+	if(req.session.user && (req.session.user.id)){
+		req.session.destroy(function(err){
+			console.log('session deleted');
+			res.redirect('/e');
+		});
+	}else {
+		res.redirect('/login');
+	}
 });
 
 // Testing

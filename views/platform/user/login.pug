@@ -1,21 +1,23 @@
-extends ../layout.pug
-block content
-	if error
-		.error
-			span El correo o la contraseña no son correctos
-	form(action="/platform/profile/login" method="POST")
-		.form__control
-			.form__input
-				label(for="nickname") Correo electrónico:
-			.form__input
-				input(type="text" id="nickname" name="nickname" placeholder="Email")
-		.form__control
-			.form__input
-				label(for="pwd") Contraseña:
-			.form__input
-				input(type="password" id="pwd" name="pwd" placeholder="Contraseña")
-		.form__control
-			.form__input
-				input(type="submit" value="Ingresar")
-			.form__input
-				a(href="/platform/register") ¿No tienes cuenta? Resgistrate ahora!
+extends ../home-layout.pug
+block main
+	div(class="main-center")
+		div(class="mdl-card mdl-shadow--6dp no-flex")
+			div(class="mdl-card__title mdl-color--primary mdl-color-text--white ")
+				h2(class="mdl-card__title-text") Iniciar sesión
+			if error
+				div(class="mdl-color--red-700 mdl-color-text--white ed-container abcenter")
+					div(class="ed-item")
+						p Usuario o contraseña no válidos
+			div(class="mdl-card__supporting-text")
+				form(action="/e/profile/login/" method="POST" id="login-form")
+					div(class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label")
+						input(type="email" id="email" name="email" class="mdl-textfield__input")
+						label(for="email" class="mdl-textfield__label") Correo electrónico
+					div(class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label")
+						input(type="password" id="pwd" name="pwd" class="mdl-textfield__input")
+						label(for="pwd" class="mdl-textfield__label") Contraseña
+			div(class="mdl-card__actions mdl-card--border ed-container justify")
+				div(class="ed-item base-20")
+					button(id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect") Iniciar
+				div(class="ed-item base-70")
+					a(href="/register" class="mdl-button mdl-js-button mdl-button--accent mdl-js-ripple-effect") Crear una cuenta

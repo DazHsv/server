@@ -4,7 +4,7 @@
 	justify-content:space-between;
 }
 
-.white-gc-link {
+.white-bg-link {
 	transition: box-shadow linear .2s, color linear .2s;
 
 	&:hover {
@@ -13,6 +13,42 @@
 		font-weight: normal !important;
 	}
 }
+.login {
+	min-height: calc(100vh);
+	margin-top: 64px;
+	width: 100vw;
+}
+
+.full-height {
+	margin-top: 64px;
+}
+
+.no-flex {
+	flex:none;
+}
+
+.mdl-mini-footer {
+	padding: 16px 16px;
+}
+
+.huge-card {
+	min-height: auto;
+}
+
+.auto-height {
+	min-height: 300px;
+}
+
+.top-margin-for-header {
+	padding-top: 3em;
+}
+
+.margin-right {
+	@include from(tablet){
+		margin-right: 1em;	
+	}
+}
 
 // Custom components
 @import "custom-components/base";
+@import "custom-components/user-home";

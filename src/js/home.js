@@ -20,5 +20,10 @@ $(function(){
 });
 
 $(function(){
-	$(".button-collapse").sideNav();
+	$('#login-button').on('click',function(){
+			$('#login-form').submit();
+	});
+	$('#reg-button').on('click',function(){
+			$('#reg-form').submit();
+	});
 });

@@ -1,0 +1,39 @@
+extends ../layout.pug
+block content
+	div(class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header")
+		header(class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-500")
+			div(class="mdl-layout__header-row")
+				span(class="mdl-layout-title") Bienvenido #{user.name.first}!
+				div(class="mdl-layout-spacer")
+				//div(class="mdl-textfield mdl-js-textfield mdl-textfield--expandable")
+					label(class="mdl-button mdl-js-button mdl-button--icon" for="search")
+						i(class="material-icons") search
+					div(class="mdl-textfield__expandable-holder")
+						input(class="mdl-textfield__input" type="text" id="search")
+						label(class="mdl-textfield__label" for="search") ¿Qué estás buscando?
+					
+		div(class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50")
+			header(class="demo-drawer-header")
+				img(class="demo-avatar" src="http://placehold.it/48", alt="")
+				div(class="demo-avatar-dropdown")
+					span #{user.email}
+					div(class="mdl-layout-spacer")
+					button(class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="cfgbtn")
+						i(class="material-icons") arrow_drop_down
+						//span(class="visuallyhidden") Configuración
+					ul(class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="cfgbtn")
+						li(class="mdl-menu__item"): a(href="/e/profile/config") Configuración
+						li(class="mdl-menu__item"): a(href="/e/logout") Cerrar sesión
+			nav(class="demo-navigation mdl-navigation mdl-color--blue-grey-800")
+				a(class="mdl-navigation__link" href="/e") #[i(class="mdl-color-text--blue-grey-400 material-icons") home] Inicio
+				a(class="mdl-navigation__link" href="/e") #[i(class="mdl-color-text--blue-grey-400 material-icons") school] Mis cursos
+				a(class="mdl-navigation__link" href="/e") #[i(class="mdl-color-text--blue-grey-400 material-icons") video_library] Mis videos
+				a(class="mdl-navigation__link" href="/e") #[i(class="mdl-color-text--blue-grey-400 material-icons") email] Inbox
+		main(class=" mdl-layout__content ed-container content mdl-color--grey-100")
+			div(class="ed-item")
+				if !user.verified
+					div(class="ed-container base-100 mdl-shadow--2dp")
+						div(class="ed-item abcenter mdl-color--teal-500 mdl-color-text--white verify")
+							p(class="verify-text") Tienes que verificar tu correo electrónico, puedes hacerlo #[a(class="mdl-color-text--yellow-500" href="/e/profile/verify") aquí]
+			div(class="ed-item")
+				block main-content

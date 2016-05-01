@@ -9,42 +9,16 @@ head
 	link(rel="stylesheet", href="http://fonts.googleapis.com/icon?family=Material+Icons")
 
 	// Platform.css
-	link(rel="stylesheet", href="css/main.min.css")
+	link(rel="stylesheet", href="/css/main.min.css")
 	
 	title E-Learning Platform | Isamael Corp
 body.e.column.platform
-
-	.mdl-layout.mdl-js-layout
-		header.mdl-layout__header
-			.mdl-layout__header-row
-				span.mdl-layout-title Isamael Corp: e#[sup 3]
-				.mdl-layout-spacer
-				nav.mdl-navigation
-					a.mdl-navigation__link.white-bg-link(href="/") Inicio
-					a.mdl-navigation__link.white-bg-link(href="/e/register") Registrarse
-					a.mdl-navigation__link.white-bg-link(href="/e/login") Iniciar sesión
-
-
-		.mdl-layout__drawer
-			span.mdl-layout-title Isamael Corp: e#[sup 3]
-			nav.mdl-navigation
-				a.mdl-navigation__link.white-bg-link(href="/") Inicio
-				a.mdl-navigation__link.white-bg-link(href="/e/register") Registrarse
-				a.mdl-navigation__link.white-bg-link(href="/e/login") Iniciar sesión
-
-	main#main
-		block content
-
-	footer.mdl-mini-footer
-		.mdl-mini-footer__left-section
-			.mdl-logo Isamael Corp
-			ul.mdl-mini-footer__link-list
-				each i in ['Ayuda', 'Términos y Condiciones']
-					li: a(href="#") #{i}
+	
+	block content
 
 	// jQuery
 	script(src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous")
 	// MDL.js
 	script(src="https://code.getmdl.io/1.1.3/material.min.js")
 	// Main.js
-	script(src="js/main.min.js")
+	script(src="/js/main.min.js")

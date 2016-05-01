@@ -44,9 +44,11 @@ module.exports = function(app){
 		secret:"221weqofyb9iuqxegoi",
 		resave:false,
 		saveUninitialized:false,
+		unset:'destroy',
 		store: new MongoStore({
 			mongooseConnection: db,
-			ttl: 24 * 60 * 60
+			ttl: 3 * 60 * 60,
+			touchAfter: 24 * 60 *60
 		})
 	}));
 

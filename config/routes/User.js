@@ -1,7 +1,28 @@
 var express = require('express'),
 	router = express.Router(),
 	User = require('../models').User,
-	enc = require('../enc');
+	enc = require('../enc'),
+	session = require('express-session'),
+	MongoStore = require('connect-mongo/es5')(session);
+
+// User Home
+router.get('/',function(req,res){
+	if(req.session.user != null){
+		User.findOne({
+			'_id':req.session.user.id,
+			'email':req.session.user.email
+		},function(err,u){
+			res.render('platform/user/index',{user:u});
+		});
+	}else {
+		res.redirect('/login');
+	}
+});
+
+// Verify User Email
+router.get('/verify', function(req,res){
+	res.render('platform/user/verify');
+});
 
 // Get User Profile
 router.get('/:user_id', function(req,res) {
@@ -10,74 +31,96 @@ router.get('/:user_id', function(req,res) {
 			console.error.bind('Error finding user : ');
 			res.render('platform/404');
 		}else {
-			res.render('platform/user/home', {user:u});
+			res.render('platform/user/index', {user:u});
 		}
 	});
 });
 
 // Create User
 router.post('/register', function(req,res) {
-
-	var exist = {
-			user:false,
-			email:false
-		};
-
-	User.findOne({ nickname:req.body.nickname }, function(err, u){
-		exist.user = (u != null) ? true : false;
-	});
-	User.findOne({ email:req.body.email }, function(err, u){
-		exist.email = (u != null) ? true : false;
-	});
-
-	if(!exist.user && !exist.email){
-
-		var today = new Date();
-		var data = {
-			nickname:req.body.nickname,
-			name: {
-				first:req.body.firstname,
-				last:req.body.lastname
+	var today = new Date();
+	var pwd = enc(req.body.pwd);
+	var data = {
+		nickname:req.body.nickname,
+		name: {
+			first:req.body.firstname,
+			last:req.body.lastname
+		},
+		dates: {
+			birth: {
+				day:1,
+				month:1,
+				year:1998
 			},
-			dates: {
-				birth: {
-					day:1,
-					month:1,
-					year:1998
-				},
-				register: today
-			},
-			email:req.body.email,
-			pwd:enc(req.body.pwd)
+			register: today
+		},
+		email:req.body.email,
+		pwd:pwd
+	}
+
+	var user = new User(data);
+	console.log(user);
+
+	user.save( function(err) {
+		if(err) {
+			console.log(err);
+			res.end();
+		}else{
+			req.session.user = {
+				'id':user._id,
+				'email':user.email
+			};
+			res.redirect("/e/profile/");
 		}
+	});
+});
 
-		var user = new User(data);
-		console.log(user);
-
-		user.save( function(err) {
-			if(err) console.error.bind('Error saving user : ');
-			res.redirect("/platform");
+// User courses
+router.get('/courses',function(req,res){
+	if( (req.session.user != null) && req.session.user.id){
+		User.findOne({
+			'_id':req.session.user.id
+		}, 'courses' ,function(err,courses){
+			res.render('platform/course/index',{'courses': courses});
 		});
-	}else {
-		res.render('platform/user/register',{ error: exist });
+	}else{
+		res.redirect('/login');
 	}
 });
 
-// Log User
-router.get('/login', function(req,res){
-	res.redirect('/platform/login');
+// User videos
+router.get('/videos',function(req,res){
+	if( (req.session.user != null) && req.session.user.id){
+		User.findOne({
+			'_id':req.session.user.id
+		}, 'videos' ,function(err,videos){
+			res.render('platform/video/index',{'videos': videos});
+		});
+	}else{
+		res.redirect('/login');
+	}
 });
-router.post('/login', function(req,res) {
+
+// Login User
+router.post('/login/', function(req,res) {
 	var pwd = enc(req.body.pwd);
 	User.findOne({
-		email:req.body.email,
-		pwd:pwd
+		'email':req.body.email,
+		'pwd':pwd
 	},
 	function(err,user){
-		console.log(err);
-		console.log('=========');
+		console.log(req.body.email);
+		console.log(pwd);
 		console.log(user);
-		res.send(':3');
+		if(err || (user == null)){
+			res.redirect('/e/login/?error=true');
+		}else{
+			req.session.user = {
+				'id':user._id,
+				'email':user.email
+			};
+			res.redirect("/e/profile/");
+		}
 	});
 });
 

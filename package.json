@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/DazHsv/server"
   },
   "engines": {
     "node": ">= 0.6.0",
@@ -37,5 +37,8 @@
     "gulp-sass": "^2.3.1",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-uglify": "^1.5.3"
+  },
+  "scripts": {
+    "start":"node server.js & gulp"
   }
 }

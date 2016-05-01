@@ -1,0 +1,29 @@
+extends ./layout.pug
+block content
+	div(class="mdl-layout mdl-js-layout")
+		header(class="mdl-layout__header")
+			.mdl-layout__header-row
+				span.mdl-layout-title Isamael Corp: e#[sup 3]
+				.mdl-layout-spacer
+				nav.mdl-navigation
+					a.mdl-navigation__link.white-bg-link(href="/") Inicio
+					a.mdl-navigation__link.white-bg-link(href="/register") Registrarse
+					a.mdl-navigation__link.white-bg-link(href="/login") Iniciar sesión
+
+		.mdl-layout__drawer
+			span.mdl-layout-title Isamael Corp: e#[sup 3]
+			nav.mdl-navigation
+				a.mdl-navigation__link(href="/") Inicio
+				a.mdl-navigation__link(href="/login") Iniciar sesión
+				a.mdl-navigation__link(href="/register") Registrarse
+				a.mdl-navigation__link(href="/help") Ayuda
+
+		main#main(class="mdl-layout__content top-margin-for-header")
+			block main
+
+		//footer.mdl-mini-footer
+			.mdl-mini-footer__left-section
+				.mdl-logo Isamael Corp
+				ul.mdl-mini-footer__link-list
+					each i in ['Ayuda', 'Términos y Condiciones']
+						li: a(href="#") #{i}

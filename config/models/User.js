@@ -28,7 +28,15 @@ userStructure = {
 		subscribed: [ { type:ObjectId, ref:'Course', default:[] }],
 		created: [ { type:ObjectId, ref:'Course', default:[] }]
 	},
-	avatar_url:String
+	avatar_url:String,
+	genere:{
+		type:String,
+		enum:["M","F"]
+	},
+	acceptedTerms:{
+		type:Boolean,
+		default:false
+	}
 }
 
 module.exports = userStructure;
