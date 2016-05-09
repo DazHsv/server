@@ -1,10 +1,10 @@
 var express        = require('express'),
 	bodyParser     = require('body-parser'),
 	helmet         = require('helmet'),
-	methodOverride = require('method-override'),
-	session        = require('express-session'),
-	mongoose       = require('mongoose'),
-	MongoStore     = require('connect-mongo/es5')(session);
+	methodOverride = require('method-override');
+	//session        = require('express-session'),
+	//mongoose       = require('mongoose'),
+	//MongoStore     = require('connect-mongo/es5')(session);
 
 // Rutas de la plataforma
 /*var toHome      = require('./routes/Home'),
@@ -13,7 +13,7 @@ var express        = require('express'),
 	toCourses   = require('./routes/Course'),*/
 var toRedirects = require('./routes/Redirects');
 
-var connection_string = '127.0.0.1:27017/e3';
+/*var connection_string = '127.0.0.1:27017/e3';
 	if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 	  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
 	  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -30,7 +30,7 @@ var connection_string = '127.0.0.1:27017/e3';
 	});
 	db.on('open', function() {
 		console.log('Conected to mongodb');
-	});
+	});*/
 
 module.exports = function(app){
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -40,7 +40,7 @@ module.exports = function(app){
 	app.use(helmet());
 	app.set('view engine','pug');
 
-	app.use(session({
+	/*app.use(session({
 		secret:"221weqofyb9iuqxegoi",
 		resave:false,
 		saveUninitialized:false,
@@ -50,7 +50,7 @@ module.exports = function(app){
 			ttl: 3 * 60 * 60,
 			touchAfter: 24 * 60 *60
 		})
-	}));
+	}));*/
 
 
 	// Routing
