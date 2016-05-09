@@ -7,11 +7,11 @@ var express        = require('express'),
 	MongoStore     = require('connect-mongo/es5')(session);
 
 // Rutas de la plataforma
-var toHome      = require('./routes/Home'),
+/*var toHome      = require('./routes/Home'),
 	toVideos    = require('./routes/Video'),
 	toUsers     = require('./routes/User'),
-	toCourses   = require('./routes/Course'),
-	toRedirects = require('./routes/Redirects');
+	toCourses   = require('./routes/Course'),*/
+var toRedirects = require('./routes/Redirects');
 
 var connection_string = '127.0.0.1:27017/e3';
 	if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -55,8 +55,8 @@ module.exports = function(app){
 
 	// Routing
 	app.use('/',toRedirects);
-	app.use('/e',toHome);
+	//app.use('/e',toHome);
 	//app.use('/platform/video',toVideos);
-	app.use('/e/profile', toUsers);
+	//app.use('/e/profile', toUsers);
 	//app.use('/platform/course', toCourses);
 }

@@ -1,0 +1,27 @@
+angular.module('E3')
+.config(['$routeProvider',function($routeProvider){
+	$routeProvider
+		.when('/',{
+			templateUrl:'views/home.html',
+			controller:'HomeController'
+		})
+		.when('/videos',{
+			templateUrl:'views/video.html',
+			controller:'VideosController'
+		})
+		.when('/courses',{
+			templateUrl:'views/course.html',
+			controller:'CoursesController'
+		})
+		.when('/inbox',{
+			templateUrl:'views/inbox.html',
+			controller:'InboxController'
+		})
+		.when('/config',{
+			templateUrl:'views/config.html',
+			controller:'ConfigController'
+		})
+		.otherwise({
+			templateUrl:'views/404.html'
+		});
+}]);

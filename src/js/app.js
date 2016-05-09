@@ -1,0 +1,1 @@
+var app = angular.module("E3",['ngRoute','ngResource']);
